@@ -1,5 +1,8 @@
+'use client';
+
 import Link from "next/link";
 import { Clock, Instagram, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { useName } from "@/context/NameContext";
 
 function TikTokIcon({ className }: { className?: string }) {
   return (
@@ -16,6 +19,11 @@ function TikTokIcon({ className }: { className?: string }) {
 }
 
 export default function Footer() {
+  const { name } = useName();
+  const nameParts = name.trim().split(" ");
+  const lastName = nameParts.length > 1 ? nameParts[nameParts.length - 1] : "";
+  const firstName = nameParts.length > 1 ? nameParts.slice(0, -1).join(" ") : name;
+
   return (
     <footer className="bg-black border-t border-white/10 pt-16 pb-8 text-gray-400 text-sm">
       <div className="container mx-auto px-6">
@@ -24,7 +32,8 @@ export default function Footer() {
           {/* 1. Kolon: Marka & Hakkında */}
           <div>
             <Link href="/" className="text-2xl font-serif font-bold tracking-widest text-white block mb-6">
-              ELIF <span className="text-gold-400">KAYA</span>
+              {firstName.toUpperCase()}{" "}
+              {lastName ? <span className="text-gold-400">{lastName.toUpperCase()}</span> : null}
             </Link>
             <p className="leading-relaxed mb-6">
               Ankara'nın en prestijli güzellik merkezinde, uzman kadromuz ve son teknoloji cihazlarımızla kendinizi yeniden keşfedin.
@@ -101,7 +110,7 @@ export default function Footer() {
           </div>
 
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-600">
-            <p>&copy; 2025 Elif Kaya Güzellik. Tüm hakları saklıdır.</p>
+            <p>&copy; 2025 {name} Güzellik. Tüm hakları saklıdır.</p>
             
             <div className="flex gap-6">
               <Link href="/yasal/aydinlatma-metni" className="hover:text-gold-400 transition-colors">

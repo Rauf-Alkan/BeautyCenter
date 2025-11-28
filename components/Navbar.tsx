@@ -4,10 +4,16 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Menu, X, Phone } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useName } from "@/context/NameContext";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { name } = useName();
+
+  const nameParts = name.trim().split(" ");
+  const lastName = nameParts.length > 1 ? nameParts[nameParts.length - 1] : "";
+  const firstName = nameParts.length > 1 ? nameParts.slice(0, -1).join(" ") : name;
 
   // Scroll olayını dinle (Aşağı inince menü rengi değişsin)
   useEffect(() => {
@@ -38,7 +44,8 @@ export default function Navbar() {
       <div className="container mx-auto px-6 flex items-center justify-between">
         {/* LOGO */}
         <Link href="/" className="text-2xl font-serif font-bold tracking-widest text-white">
-          ELIF <span className="text-gold-400">KAYA</span>
+          {firstName.toUpperCase()}{" "}
+          {lastName ? <span className="text-gold-400">{lastName.toUpperCase()}</span> : null}
         </Link>
 
         {/* DESKTOP MENU */}

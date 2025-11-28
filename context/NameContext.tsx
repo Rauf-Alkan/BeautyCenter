@@ -22,13 +22,22 @@ function NameProviderContent({ children }: { children: ReactNode }) {
   const searchParams = useSearchParams();
   const [name, setName] = useState(DEFAULT_NAME);
 
+  const safeDecode = (value: string) => {
+    try {
+      return decodeURIComponent(value);
+    } catch {
+      return value;
+    }
+  };
+
   useEffect(() => {
     const queryName = searchParams.get("name");
-    if (queryName && queryName.trim().length > 0) {
-      const cleaned = queryName.trim();
-      setName(cleaned);
+    const decodedQuery = queryName ? safeDecode(queryName).trim() : "";
+
+    if (decodedQuery) {
+      setName(decodedQuery);
       if (typeof window !== "undefined") {
-        localStorage.setItem("preferredName", cleaned);
+        localStorage.setItem("preferredName", decodedQuery);
       }
       return;
     }

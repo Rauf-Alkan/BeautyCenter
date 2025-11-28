@@ -13,16 +13,16 @@ if (!resendApiKey) {
 const resend = new Resend(resendApiKey);
 
 export async function sendEmail(formData: FormData) {
-  const name = (formData.get("name") as string) || "";
-  const surname = (formData.get("surname") as string) || "";
+  const name = ((formData.get("name") as string) || "").trim();
+  const surname = ((formData.get("surname") as string) || "").trim();
   const fullName = [name, surname].filter(Boolean).join(" ").trim() || "İsim belirtilmedi";
-  const phone = (formData.get("phone") as string) || "Telefon belirtilmedi";
+  const phone = ((formData.get("phone") as string) || "").trim();
   const source = (formData.get("source") as string) || "Kaynak belirtilmedi";
   const message = (formData.get("message") as string) || "Mesaj yok";
   const service = (formData.get("service") as string) || "Belirtilmedi";
 
-  if (!name || !phone) {
-    return { success: false, error: "Lütfen zorunlu alanları doldurun." };
+  if (!phone) {
+    return { success: false, error: "Telefon bilgisi zorunludur." };
   }
 
   if (!resendFrom || !resendTo) {

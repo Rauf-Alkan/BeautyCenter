@@ -25,9 +25,19 @@ function NameProviderContent({ children }: { children: ReactNode }) {
   useEffect(() => {
     const queryName = searchParams.get("name");
     if (queryName && queryName.trim().length > 0) {
-      setName(queryName.trim());
-    } else {
-      setName(DEFAULT_NAME);
+      const cleaned = queryName.trim();
+      setName(cleaned);
+      if (typeof window !== "undefined") {
+        localStorage.setItem("preferredName", cleaned);
+      }
+      return;
+    }
+
+    if (typeof window !== "undefined") {
+      const stored = localStorage.getItem("preferredName");
+      if (stored && stored.trim().length > 0) {
+        setName(stored.trim());
+      }
     }
   }, [searchParams]);
 

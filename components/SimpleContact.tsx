@@ -61,7 +61,7 @@ export default function SimpleContact() {
             <form
               id="footer-simple-form"
               action={handleSubmit}
-              className="grid items-center gap-4 md:grid-cols-[1fr_1fr_auto]"
+              className="grid items-center gap-4 md:grid-cols-[1fr_1fr_1fr_auto]"
             >
               {status === "error" && (
                 <div className="col-span-full rounded-2xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-xs text-red-100">
@@ -73,7 +73,16 @@ export default function SimpleContact() {
                 <input
                   name="name"
                   type="text"
-                  placeholder="Adınız (opsiyonel)"
+                  placeholder="Adınız"
+                  className="w-full rounded-full border border-white/10 bg-black/40 px-4 py-3 text-sm text-white placeholder:text-gray-500 outline-none transition focus:border-[#E5C469] focus:shadow-[0_0_15px_rgba(229,196,105,0.4)]"
+                />
+              </div>
+
+              <div className="relative w-full">
+                <input
+                  name="surname"
+                  type="text"
+                  placeholder="Soyadınız (opsiyonel)"
                   className="w-full rounded-full border border-white/10 bg-black/40 px-4 py-3 text-sm text-white placeholder:text-gray-500 outline-none transition focus:border-[#E5C469] focus:shadow-[0_0_15px_rgba(229,196,105,0.4)]"
                 />
               </div>

@@ -23,80 +23,94 @@ export default function SimpleContact() {
   }
 
   return (
-    // Üst ve alta ince altın rengi çizgi (border-y) ve koyu zemin
-    <section className="relative py-12 bg-neutral-900 border-y border-gold-500/20" id="contact">
+    <section className="relative border-y border-gold-500/20 bg-neutral-900 py-14" id="contact">
       <div className="container mx-auto px-6">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
-          
-          {/* SOL: Başlık ve Açıklama */}
-          <div className="text-center lg:text-left lg:w-1/3">
-            <h3 className="text-2xl font-serif text-white mb-2 flex items-center justify-center lg:justify-start gap-3">
-              <div className="w-10 h-10 rounded-full bg-gold-500/10 flex items-center justify-center text-gold-400">
+        <div className="mx-auto max-w-5xl space-y-6">
+          <div className="flex flex-col items-center gap-3 text-center md:flex-row md:items-center md:justify-between md:text-left">
+            <div className="flex items-center gap-3">
+              <div className="flex h-11 w-11 items-center justify-center rounded-full bg-gold-500/10 text-gold-400">
                 <Phone size={20} />
               </div>
-              Sizi Arayalım
-            </h3>
-            <p className="text-gray-400 text-sm">
-              Numaranızı bırakın, uzmanlarımız 15 dk içinde size dönüş yapsın.
-            </p>
+              <div>
+                <h3 className="text-2xl font-serif text-white">Sizi Arayalım</h3>
+                <p className="text-sm text-gray-300">
+                  Numaranızı bırakın, 15 dakika içinde dönüş yapalım.
+                </p>
+              </div>
+            </div>
           </div>
 
-          {/* SAĞ: Yatay Form */}
-          <div className="w-full lg:w-2/3">
-            {status === "success" ? (
-              <motion.div 
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                className="bg-green-500/10 border border-green-500/20 rounded-lg p-4 flex items-center justify-between"
+          {status === "success" ? (
+            <motion.div
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="grid items-center gap-4 rounded-2xl border border-green-500/25 bg-green-500/10 p-4 text-sm text-green-100 md:grid-cols-[1fr_auto]"
+            >
+              <div className="flex items-center gap-3">
+                <span className="font-semibold">✓ Numaranız ulaştı.</span>
+                <span className="text-green-100/70">En kısa sürede arayacağız.</span>
+              </div>
+              <button
+                onClick={() => setStatus("idle")}
+                className="text-xs font-semibold text-white underline underline-offset-4"
               >
-                <div className="flex items-center gap-3">
-                  <span className="text-green-500 font-bold">✓ Numaranız İletildi.</span>
-                  <span className="text-green-200/60 text-sm">En kısa sürede arayacağız.</span>
+                Yeni
+              </button>
+            </motion.div>
+          ) : (
+            <form
+              id="footer-simple-form"
+              action={handleSubmit}
+              className="grid items-center gap-4 md:grid-cols-[1fr_1fr_auto]"
+            >
+              {status === "error" && (
+                <div className="col-span-full rounded-2xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-xs text-red-100">
+                  Bir şeyler ters gitti. Lütfen tekrar deneyin.
                 </div>
-                <button onClick={() => setStatus("idle")} className="text-xs text-white underline">Yeni</button>
-              </motion.div>
-            ) : (
-              <form 
-                id="footer-simple-form"
-                action={handleSubmit} 
-                className="flex flex-col md:flex-row gap-4"
+              )}
+
+              <div className="relative w-full">
+                <input
+                  name="name"
+                  type="text"
+                  placeholder="Adınız (opsiyonel)"
+                  className="w-full rounded-full border border-white/10 bg-black/40 px-4 py-3 text-sm text-white placeholder:text-gray-500 outline-none transition focus:border-[#E5C469] focus:shadow-[0_0_15px_rgba(229,196,105,0.4)]"
+                />
+              </div>
+
+              <div className="relative w-full">
+                <input
+                  name="phone"
+                  required
+                  type="tel"
+                  inputMode="tel"
+                  placeholder="Telefon Numaranız"
+                  className="w-full rounded-full border border-white/10 bg-black/40 px-4 py-3 text-sm text-white placeholder:text-gray-500 outline-none transition focus:border-[#E5C469] focus:shadow-[0_0_15px_rgba(229,196,105,0.4)]"
+                />
+              </div>
+
+              <button
+                disabled={status === "loading"}
+                className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#E5C469] px-6 py-3 text-sm font-semibold text-black transition hover:bg-[#d8b45a] hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-70 md:w-auto"
               >
-                <div className="relative flex-1">
-                  <input
-                    name="name"
-                    required
-                    type="text"
-                    placeholder="Adınız Soyadınız"
-                    className="w-full bg-black/30 border border-white/10 rounded-lg px-4 py-3 text-white placeholder:text-gray-600 focus:outline-none focus:border-gold-500/50 focus:bg-black/50 transition-all"
-                  />
-                </div>
-                
-                <div className="relative flex-1">
-                  <input
-                    name="phone"
-                    required
-                    type="tel"
-                    placeholder="Telefon (05XX...)"
-                    className="w-full bg-black/30 border border-white/10 rounded-lg px-4 py-3 text-white placeholder:text-gray-600 focus:outline-none focus:border-gold-500/50 focus:bg-black/50 transition-all"
-                  />
-                </div>
+                {status === "loading" ? (
+                  <Loader2 size={18} className="animate-spin" />
+                ) : (
+                  <>
+                    Beni Arayın
+                    <ArrowRight
+                      size={18}
+                      className="transition-transform group-hover:translate-x-0.5"
+                    />
+                  </>
+                )}
+              </button>
 
-                <button
-                  disabled={status === "loading"}
-                  className="bg-gold-500 hover:bg-gold-400 text-black font-bold px-8 py-3 rounded-lg transition-all flex items-center justify-center gap-2 whitespace-nowrap shadow-lg shadow-gold-500/10"
-                >
-                  {status === "loading" ? (
-                    <Loader2 size={18} className="animate-spin" />
-                  ) : (
-                    <>
-                      Gönder <ArrowRight size={18} />
-                    </>
-                  )}
-                </button>
-              </form>
-            )}
-          </div>
-
+              <p className="col-span-full text-center text-xs text-gray-500 md:text-left">
+                Bilgileriniz üçüncü kişilerle paylaşılmaz.
+              </p>
+            </form>
+          )}
         </div>
       </div>
     </section>

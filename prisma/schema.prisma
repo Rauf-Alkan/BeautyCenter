@@ -1,0 +1,38 @@
+// Bu dosya artık Vercel ve Neon (PostgreSQL) için hazırdır.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  // DEPLOYMENT ADIMI 1: Sağlayıcıyı PostgreSQL yapıyoruz.
+  provider = "postgresql"
+  // DEPLOYMENT ADIMI 2: URL'i Vercel'deki ortam değişkenlerinden çekecek.
+  url      = env("DATABASE_URL")
+}
+
+// Blog Sistemi Modeli
+model BlogPost {
+  id          Int      @id @default(autoincrement())
+  title       String
+  slug        String   @unique
+  summary     String
+  // DEPLOYMENT ADIMI 3: Uzun blog yazıları için PostgreSQL'e özel "Text" tipini zorunlu kılıyoruz.
+  // Bu sayede çok uzun yazılar veritabanında kesilmez.
+  content     String   @db.Text
+  coverImage  String?
+  readTime    Int      @default(2)
+  views       Int      @default(0)
+  publishedAt DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// Galeri Modeli (Standart Stringler yeterlidir)
+model GalleryItem {
+  id        Int      @id @default(autoincrement())
+  src       String
+  alt       String
+  category  String
+  label     String
+  createdAt DateTime @default(now())
+}

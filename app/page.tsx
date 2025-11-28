@@ -12,10 +12,8 @@ const homeBeforeAfter = {
   id: "home-before-after",
   title: "Gerçek Sonuçlar",
   subtitle: "Öncesi & Sonrası",
-  beforeImage:
-    "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1600&q=80",
-  afterImage:
-    "https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?auto=format&fit=crop&w=1600&q=80",
+  beforeImage: "/before.webp",
+  afterImage: "/after.webp",
 };
 
 export const dynamic = "force-dynamic";

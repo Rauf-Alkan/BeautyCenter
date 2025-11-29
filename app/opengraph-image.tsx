@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
 
-export const alt = "Elif Kaya Güzellik | Ankara";
+export const alt = "Güzellik Merkezi Randevu Sistemi Demosu";
 export const size = {
   width: 1200,
   height: 630,
@@ -20,68 +20,100 @@ export default async function Image() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: "#0a0a0a",
-          backgroundImage: "linear-gradient(to bottom right, #0a0a0a, #1a1a1a)",
+          backgroundColor: "#000000",
+          backgroundImage: "linear-gradient(to bottom right, #000000, #111111)",
+          fontFamily: 'serif',
         }}
       >
-        {/* Dekoratif Çerçeve */}
+        {/* Arka Plan Deseni (Hafif) */}
         <div
             style={{
                 position: "absolute",
-                top: 40,
-                left: 40,
-                right: 40,
-                bottom: 40,
-                border: "2px solid #333",
-                borderRadius: 20,
+                top: 0, left: 0, right: 0, bottom: 0,
+                backgroundImage: 'radial-gradient(circle at 25px 25px, #222 2%, transparent 0%), radial-gradient(circle at 75px 75px, #222 2%, transparent 0%)',
+                backgroundSize: '100px 100px',
+                opacity: 0.5,
             }}
         />
 
-        {/* Logo Alanı */}
+        {/* Altın Çerçeve */}
+        <div
+            style={{
+                position: "absolute",
+                top: 30,
+                left: 30,
+                right: 30,
+                bottom: 30,
+                border: "1px solid #D4AF37", // Gold
+                borderRadius: 0,
+                opacity: 0.3,
+            }}
+        />
+
+        {/* Üst Badge (Etiket) */}
         <div
           style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            width: 100,
-            height: 100,
-            borderRadius: "50%",
             background: "#D4AF37",
             color: "#000",
-            fontSize: 48,
-            fontWeight: 900,
+            padding: "8px 24px",
+            borderRadius: "50px",
+            fontSize: 18,
+            fontWeight: 700,
+            textTransform: "uppercase",
             marginBottom: 40,
-            boxShadow: "0 0 50px rgba(212, 175, 55, 0.3)",
+            letterSpacing: "2px",
           }}
         >
-          EK
+          Özel Demo Tasarım
         </div>
 
-        {/* Başlık */}
+        {/* Ana Başlık */}
         <div
           style={{
             fontSize: 70,
             fontWeight: 900,
             color: "white",
-            marginBottom: 20,
+            marginBottom: 10,
             textAlign: "center",
-            fontFamily: "serif",
+            lineHeight: 1.1,
+            textShadow: "0 4px 20px rgba(0,0,0,0.8)",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
-          ELIF KAYA
+          <span>GÜZELLİK MERKEZİNİZE</span>
+          <span style={{ color: "#D4AF37" }}>PRESTİJ KATIN</span>
         </div>
 
-        {/* Alt Başlık */}
+        {/* Alt Açıklama */}
         <div
           style={{
-            fontSize: 32,
-            color: "#D4AF37", // Gold
-            textTransform: "uppercase",
-            letterSpacing: "4px",
+            fontSize: 28,
+            color: "#aaa",
+            marginTop: 30,
             textAlign: "center",
+            maxWidth: "800px",
+            lineHeight: 1.5,
           }}
         >
-          Ankara Estetik ve Güzellik Merkezi
+          Online Randevu • Hizmet Tanıtımı • %100 Mobil Uyumlu
+        </div>
+        
+        {/* Buton Görünümü */}
+        <div
+            style={{
+                marginTop: 40,
+                display: 'flex',
+                alignItems: 'center',
+                gap: '10px',
+                fontSize: 20,
+                color: '#fff',
+                opacity: 0.8
+            }}
+        >
+            <span>👉</span>
+            <span>İncelemek için tıklayın</span>
         </div>
       </div>
     ),

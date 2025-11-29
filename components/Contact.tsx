@@ -23,7 +23,9 @@ export default function Contact() {
   }
 
   return (
-    <section className="relative min-h-screen bg-neutral-950 py-24 lg:py-32" id="contact">
+    <>
+      <div id="contact" aria-hidden="true" className="sr-only" />
+      <section className="relative min-h-screen bg-neutral-950 py-24 lg:py-32 scroll-mt-24" id="appointment-form">
       {/* Arka Plan Efektleri */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 left-0 w-[500px] h-[500px] bg-gold-600/10 rounded-full blur-[120px]" />
@@ -206,5 +208,6 @@ export default function Contact() {
         </div>
       </div>
     </section>
+    </>
   );
 }

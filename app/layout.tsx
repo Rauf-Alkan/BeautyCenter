@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";          // <--- Eklendi
 import WhatsAppButton from "@/components/WhatsAppButton"; // <--- Eklendi
 import GoogleBadge from "@/components/GoogleBadge";
 import { NameProvider } from "@/context/NameContext";
+import ChatWidget from "@/components/ChatWidget";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -39,6 +40,7 @@ export default function RootLayout({
           <Footer />        {/* Her sayfada sabit */}
           <GoogleBadge />
           <WhatsAppButton />{/* Her sayfada sabit */}
+          <ChatWidget />
         </NameProvider>
       </body>
     </html>
